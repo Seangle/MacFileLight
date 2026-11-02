@@ -121,8 +121,11 @@ static NSString *ToolbarItemRefreshID = @"Refresh ToolbarItem";
 {
     if ([m_scanner scanError]) {
         if (![m_scanner isCancelled]) {
-            NSRunAlertPanel(@"Directory scan could not complete",
-                            [m_scanner scanError], nil, nil, nil);
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText:@"Directory scan could not complete"];
+            [alert setInformativeText:[m_scanner scanError]];
+            [alert runModal];
+            [alert release];
         }
         [window orderOut: self];
     } else {

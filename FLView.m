@@ -166,7 +166,11 @@
     } else {
         NSString *msg = [NSString stringWithFormat:
             @"The path %@ could not be deleted.", path];
-        NSRunAlertPanel(@"Deletion failed", msg, nil, nil, nil);
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Deletion failed"];
+        [alert setInformativeText:msg];
+        [alert runModal];
+        [alert release];
     }
 }
 
