@@ -6,7 +6,7 @@
 // nil object means the root.
 @interface NSObject (FLRadialPainterDataSource)
 - (id) child: (int) index ofItem: (id) item;
-- (int) numberOfChildrenOfItem: (id) item;
+- (long) numberOfChildrenOfItem: (id) item;
 
 - (float) weightOfItem: (id) item;
 @end

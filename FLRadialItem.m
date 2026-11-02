@@ -70,7 +70,7 @@
     float anglePerWeight = [self angleSpan] / [self weight];
     id item = [self item];
     
-    int m = [m_dataSource numberOfChildrenOfItem: item];
+    long m = [m_dataSource numberOfChildrenOfItem: item];
     NSMutableArray *children = [NSMutableArray arrayWithCapacity: m];
     
     int i;

@@ -39,7 +39,7 @@
     return [[(FLDirectory *)file children] objectAtIndex: index];
 }
 
-- (int) numberOfChildrenOfItem: (id)item
+- (long) numberOfChildrenOfItem: (id)item
 {
     FLFile *file = [self realItemFor: item];
     return [file respondsToSelector: @selector(children)]
