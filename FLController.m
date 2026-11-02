@@ -163,7 +163,7 @@ static NSString *ToolbarItemRefreshID = @"Refresh ToolbarItem";
     [openPanel setCanChooseDirectories: YES];
     [openPanel setCanChooseFiles: NO];
     int result = [openPanel runModal];
-    if (result == NSOKButton) {
+    if (result == NSModalResponseOK) {
         NSURL *fileURL = [[openPanel URLs] objectAtIndex: 0];
         NSString *path = [fileURL path];
         [self startScan: path];
