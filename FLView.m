@@ -148,7 +148,7 @@
 
 - (IBAction) trash: (id) sender
 {
-    int tag;
+    long tag;
     BOOL success;
     
     NSString *path = [m_context_target path];
