@@ -177,10 +177,10 @@
 - (IBAction) copyPath: (id) sender
 {
     NSPasteboard *pb = [NSPasteboard generalPasteboard];
-    [pb declareTypes: [NSArray arrayWithObject: NSStringPboardType]
+    [pb declareTypes: [NSArray arrayWithObject: NSPasteboardTypeString]
                owner: self];
     [pb setString: [[m_context_target path] copy]
-          forType: NSStringPboardType];
+          forType: NSPasteboardTypeString];
 }
 
 #pragma mark Drawing
