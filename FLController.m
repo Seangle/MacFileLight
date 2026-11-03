@@ -69,10 +69,6 @@ static NSString *ToolbarItemRefreshID = @"Refresh ToolbarItem";
     return [NSArray arrayWithObjects:
         ToolbarItemUpID,
         ToolbarItemRefreshID,
-        NSToolbarCustomizeToolbarItemIdentifier,
-        NSToolbarFlexibleSpaceItemIdentifier,
-        NSToolbarSpaceItemIdentifier,
-        NSToolbarSeparatorItemIdentifier,
         nil];
 }
 
