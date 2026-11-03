@@ -137,7 +137,8 @@
 
 - (IBAction) open: (id) sender
 {
-    [[NSWorkspace sharedWorkspace] openFile: [m_context_target path]];
+    NSURL *fileURL = [NSURL fileURLWithPath: [m_context_target path]];
+    [[NSWorkspace sharedWorkspace] openURL: fileURL];
 }
 
 - (IBAction) reveal: (id) sender
