@@ -38,7 +38,8 @@
                             type: (FLFileSizeType) type
                          sigFigs: (size_t) figs
 {
-    unsigned idx, base, digits, deci;
+    unsigned idx, base, digits;
+    size_t deci;
     double fsize;
     FLFileSizeType length, baseType;
     NSString *pref, *suf;
@@ -82,7 +83,7 @@
         }
     }
     
-    return [NSString stringWithFormat: @"%.*f %@%@", deci, fsize, pref, suf];
+    return [NSString stringWithFormat: @"%.*f %@%@", (int)deci, fsize, pref, suf];
 }
 
 - (NSString *) displaySize
