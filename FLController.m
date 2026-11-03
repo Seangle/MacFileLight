@@ -35,12 +35,12 @@ static NSString *ToolbarItemRefreshID = @"Refresh ToolbarItem";
     if ([itemID isEqual: ToolbarItemUpID]) {
         [item setLabel: @"Up"];
         [item setToolTip: @"Go to the parent directory"];
-        [item setImage: [NSImage imageNamed: @"arrowUp"]];
+        [item setImage: [NSImage imageWithSystemSymbolName:@"arrow.up" accessibilityDescription:@"Go to the parent directory"]];
         [item setAction: @selector(parentDir:)];
     } else if ([itemID isEqual: ToolbarItemRefreshID]) {
         [item setLabel: @"Refresh"];
         [item setToolTip: @"Rescan the current directory"];
-        [item setImage: [NSImage imageNamed: @"reload"]];
+        [item setImage: [NSImage imageWithSystemSymbolName:@"arrow.trianglehead.2.clockwise.rotate.90" accessibilityDescription:@"Rescan the current directory"]];
         [item setAction: @selector(refresh:)];
     } else {
         [item release];
