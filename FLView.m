@@ -149,30 +149,23 @@
 
 - (IBAction) trash: (id) sender
 {
-    long tag;
-    BOOL success;
-    
     NSString *path = [m_context_target path];
-    NSString *basename = [path lastPathComponent];
-    
-    success = [[NSWorkspace sharedWorkspace]
-        performFileOperation: NSWorkspaceRecycleOperation
-                      source: [path stringByDeletingLastPathComponent]
-                 destination: @""
-                       files: [NSArray arrayWithObject: basename]
-                         tag: &tag];
-    
-    if (success) {
-        [controller refresh: self];
-    } else {
-        NSString *msg = [NSString stringWithFormat:
-            @"The path %@ could not be deleted.", path];
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert setMessageText:@"Deletion failed"];
-        [alert setInformativeText:msg];
-        [alert runModal];
-        [alert release];
-    }
+
+    NSURL *fileURL = [NSURL fileURLWithPath:path];
+    [[NSWorkspace sharedWorkspace] recycleURLs:@[fileURL]
+                                       completionHandler:^(NSDictionary<NSURL *, NSURL*> *newURLS, NSError *error){
+        if (!error) {
+            [controller refresh: self];
+        } else {
+            NSString *msg = [NSString stringWithFormat:
+                @"The path %@ could not be deleted.", path];
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText:@"Deletion failed"];
+            [alert setInformativeText:msg];
+            [alert runModal];
+            [alert release];
+        }
+    }];
 }
 
 - (IBAction) copyPath: (id) sender
