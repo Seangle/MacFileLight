@@ -118,31 +118,30 @@ static NSString *stringPath(NSFileManager *fm, const FTSENT *ent) {
                            withObject: nil];
 }
 
-- (OSStatus) numberOfFiles: (uint32_t *)outnum
+- (OSStatus) numberOfFiles: (uint64_t *)outnum
                   onVolume: (const char *) cpath
 {
-    OSStatus err;
-    FSRef ref;
-    FSCatalogInfo catInfo;
-    FSVolumeInfo volInfo;
-    
-    err = FSPathMakeRef((const UInt8 *)cpath, &ref, NULL);
-    if (err) return err;
-    
-    err = FSGetCatalogInfo(&ref, kFSCatInfoVolume , &catInfo, NULL, NULL, NULL);
-    if (err) return err;
-    
-    err = FSGetVolumeInfo(catInfo.volume, 0, NULL, kFSVolInfoFileCount,
-                          &volInfo, NULL, NULL);
-    if (err) return err;
-    *outnum = volInfo.fileCount;
-    
-    err = FSGetVolumeInfo(catInfo.volume, 0, NULL, kFSVolInfoDirCount,
-                          &volInfo, NULL, NULL);
-    if (!err) {
-        *outnum += volInfo.folderCount;
+    NSURL *url = [NSURL fileURLWithFileSystemRepresentation:cpath
+                                                isDirectory:NO
+                                              relativeToURL:nil];
+    if (!url)
+        return paramErr;
+
+    NSNumber *resourceCount = nil;
+    NSError *error = nil;
+
+    if (![url getResourceValue:&resourceCount
+                        forKey:NSURLVolumeResourceCountKey
+                         error:&error]) {
+        return ioErr;
     }
-    
+
+    if (!resourceCount) {
+        return paramErr;
+    }
+
+    *outnum = resourceCount.unsignedLongValue;
+
     return noErr;
 }
 
